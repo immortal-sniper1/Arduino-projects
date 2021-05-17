@@ -1,15 +1,16 @@
 
 int T1 = 12 * 4 + 6 * 4;
 int T2 = 5 * 4 + 2;
+int TT = 1000 * 60 * 15;
 volatile int apa = 0;
-
+volatile int resst = 0;
 
 
 void waiterr( int x = 1) //15 min timer
 {
   for ( int i = 0 ; i < x; i++)
   {
-    delay(900000);    
+    delay(TT);
   }
 }
 
@@ -29,10 +30,16 @@ void FUUU()
   apa++;
 }
 
+void FUUU2()
+{
+  resst++;
+}
+
 void setup()
 {
 
   attachInterrupt (digitalPinToInterrupt(2), FUUU, RISING );
+  attachInterrupt (digitalPinToInterrupt(3), FUUU2, RISING );
 
   pinMode( 2, INPUT);   //buton
   pinMode( 3, INPUT);   //buton
@@ -49,8 +56,14 @@ void setup()
 
 void loop()
 {
+agent:
+
   for ( int j = 0; j < T1 ; j++)
   {
+    if ( resst > 0)
+    {
+goto agent;
+    }
     if ( apa > 0)
     {
       udator();
@@ -59,12 +72,19 @@ void loop()
     }
     waiterr();
   }
-
+  if ( resst > 0)
+  {
+goto agent;
+  }
   udator();
 
-  
+
   for ( int j = 0; j < T2 ; j++)
   {
+    if ( resst > 0)
+    {
+goto agent;
+    }
     if ( apa > 0)
     {
       udator();
