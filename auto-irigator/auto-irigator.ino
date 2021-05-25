@@ -1,7 +1,7 @@
 
-int T1 = 12 * 4 + 6 * 4;
-int T2 = 5 * 4 + 2;
-int TT = 1000 * 60 * 15;
+int T1 = 12 * 4 * 15 + 6 * 4* 15;
+int T2 = 5 * 4* 15 + 2* 15;
+int TT = 1000 * 60;
 volatile int apa = 0;
 volatile int resst = 0;
 
@@ -19,21 +19,31 @@ void udator()
   Serial.print("incepe udatul");
   digitalWrite(6, HIGH);
   digitalWrite(5, HIGH);
-  waiterr(2);
+  waiterr(30);
   digitalWrite(6, LOW);
   digitalWrite(5, LOW);
   Serial.print("gata udatul");
 }
+
+
+
 
 void FUUU()
 {
   apa++;
 }
 
+
+
+
 void FUUU2()
 {
   resst++;
 }
+
+
+
+
 
 void setup()
 {
