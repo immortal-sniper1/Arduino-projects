@@ -1,12 +1,12 @@
 
-int T1 = 12 * 4 * 15 + 6 * 4* 15;
-int T2 = 5 * 4* 15 + 2* 15;
-int TT = 1000 * 60;
+long int T1 = 12 * 4 * 15 + 6 * 4* 15;
+long int T2 = 5 * 4* 15 + 2* 15;
+long int TT = 1000 * 60;
 volatile int apa = 0;
 volatile int resst = 0;
 
 
-void waiterr( int x = 1) //15 min timer
+void waiterr( int x = 1) //1 min timer
 {
   for ( int i = 0 ; i < x; i++)
   {
