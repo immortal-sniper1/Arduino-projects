@@ -1,7 +1,7 @@
 
-long int T1 = 12 * 4 * 15 + 6 * 4* 15;
-long int T2 = 5 * 4* 15 + 2* 15;
-long int TT = 1000 * 60;
+long int T1 = 12L * 4L * 15L + 6L * 4L * 15L;
+long int T2 = 5L * 4L * 15L + 2L * 15L;
+long int TT = 1000L * 60L;
 volatile int apa = 0;
 volatile int resst = 0;
 
@@ -56,6 +56,9 @@ void setup()
   pinMode( 4, OUTPUT);  //led
   pinMode( 5, OUTPUT);  //led
   pinMode( 6, OUTPUT);  //NPN
+  Serial.println(T1);
+  Serial.println(T2);
+  Serial.println(TT);
 
 }
 
@@ -67,13 +70,14 @@ void setup()
 void loop()
 {
 agent:
-resst=0;
+  resst = 0;
 
   for ( int j = 0; j < T1 ; j++)
   {
+    Serial.println(j);
     if ( resst > 0)
     {
-goto agent;
+      goto agent;
     }
     if ( apa > 0)
     {
@@ -85,16 +89,17 @@ goto agent;
   }
   if ( resst > 0)
   {
-goto agent;
+    goto agent;
   }
   udator();
 
 
   for ( int j = 0; j < T2 ; j++)
   {
+    Serial.println(j);
     if ( resst > 0)
     {
-goto agent;
+      goto agent;
     }
     if ( apa > 0)
     {
