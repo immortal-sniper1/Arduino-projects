@@ -1,12 +1,12 @@
 
-long int T1 = 12L * 4L * 15L + 6L * 4L * 15L;
-long int T2 = 5L * 4L * 15L + 2L * 15L;
-long int TT = 1000L * 60L;
+int T1 = 102;
+int T2 = 30;
+long int TT = 600000L;   // timer 10 min
 volatile int apa = 0;
 volatile int resst = 0;
 
 
-void waiterr( int x = 1) //1 min timer
+void waiterr( int x = 1) //10 min timer
 {
   for ( int i = 0 ; i < x; i++)
   {
@@ -16,13 +16,13 @@ void waiterr( int x = 1) //1 min timer
 
 void udator()
 {
-  Serial.print("incepe udatul");
+  Serial.println("incepe udatul");
   digitalWrite(6, HIGH);
   digitalWrite(5, HIGH);
-  waiterr(30);
+  waiterr(3);
   digitalWrite(6, LOW);
   digitalWrite(5, LOW);
-  Serial.print("gata udatul");
+  Serial.println("gata udatul");
 }
 
 
@@ -47,17 +47,20 @@ void FUUU2()
 
 void setup()
 {
-
-  attachInterrupt (digitalPinToInterrupt(2), FUUU, RISING );
-  attachInterrupt (digitalPinToInterrupt(3), FUUU2, RISING );
-
   pinMode( 2, INPUT);   //buton
   pinMode( 3, INPUT);   //buton
   pinMode( 4, OUTPUT);  //led
   pinMode( 5, OUTPUT);  //led
   pinMode( 6, OUTPUT);  //NPN
+  attachInterrupt (digitalPinToInterrupt(2), FUUU, RISING );
+  attachInterrupt (digitalPinToInterrupt(3), FUUU2, RISING );
+  Serial.begin(9600); // open the serial port at 9600 bps:
+
+  Serial.print("timp de dormire inainte udare in intervale");
   Serial.println(T1);
+  Serial.print("timp de dormire dupa udare in intervale");
   Serial.println(T2);
+  Serial.print("interval de calculare in ms");
   Serial.println(TT);
 
 }
@@ -69,6 +72,7 @@ void setup()
 
 void loop()
 {
+  Serial.println("inceput loop:");
 agent:
   resst = 0;
 
@@ -83,7 +87,7 @@ agent:
     {
       udator();
       apa--;
-      j++;
+      j=j+3;
     }
     waiterr();
   }
@@ -92,6 +96,9 @@ agent:
     goto agent;
   }
   udator();
+
+
+
 
 
   for ( int j = 0; j < T2 ; j++)
