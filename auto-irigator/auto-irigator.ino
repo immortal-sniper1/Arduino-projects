@@ -13,6 +13,14 @@ void waiterr( int x = 1) //10 min timer
     delay(TT);
   }
 }
+void printare_var()
+{
+  Serial.print("apa= ");
+  Serial.println(apa);
+  Serial.print("resst= ");
+  Serial.println(resst);
+}
+
 
 void udator()
 {
@@ -52,10 +60,12 @@ void setup()
   pinMode( 4, OUTPUT);  //led
   pinMode( 5, OUTPUT);  //led
   pinMode( 6, OUTPUT);  //NPN
+  digitalWrite(4, LOW);
+  digitalWrite(5, LOW);
   attachInterrupt (digitalPinToInterrupt(2), FUUU, RISING );
   attachInterrupt (digitalPinToInterrupt(3), FUUU2, RISING );
   Serial.begin(9600); // open the serial port at 9600 bps:
-
+  printare_var();
   Serial.print("timp de dormire inainte udare in intervale");
   Serial.println(T1);
   Serial.print("timp de dormire dupa udare in intervale");
@@ -73,6 +83,8 @@ void setup()
 void loop()
 {
   Serial.println("inceput loop:");
+  delay(2000);
+  printare_var();
 agent:
   resst = 0;
 
@@ -87,7 +99,7 @@ agent:
     {
       udator();
       apa--;
-      j=j+3;
+      j = j + 3;
     }
     waiterr();
   }
