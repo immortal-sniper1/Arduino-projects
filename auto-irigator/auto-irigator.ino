@@ -1,5 +1,5 @@
 
-int T1 = 102;
+int T1 = 114;  //17h
 int T2 = 30;
 long int TT = 600000L;   // timer 10 min
 volatile int apa = 0;
@@ -13,6 +13,8 @@ void waiterr( int x = 1) //10 min timer
     delay(TT);
   }
 }
+
+
 void printare_var()
 {
   Serial.print("apa= ");
@@ -24,10 +26,18 @@ void printare_var()
 
 void udator()
 {
+  int i;
   Serial.println("incepe udatul");
-  digitalWrite(6, HIGH);
+  // uda 1h si se raceste 1h
   digitalWrite(5, HIGH);
-  waiterr(3);
+
+  for (i = 1; i <= 12 ; i++)
+  {
+    digitalWrite(6, HIGH);
+    delay(300000L);
+    digitalWrite(6, LOW);
+    delay(300000L);
+  }
   digitalWrite(6, LOW);
   digitalWrite(5, LOW);
   Serial.println("gata udatul");
@@ -59,7 +69,7 @@ void setup()
   pinMode( 3, INPUT);   //buton
   pinMode( 4, OUTPUT);  //led
   pinMode( 5, OUTPUT);  //led
-  pinMode( 6, OUTPUT);  //NPN
+  pinMode( 6, OUTPUT);  // releu
   digitalWrite(4, LOW);
   digitalWrite(5, LOW);
   attachInterrupt (digitalPinToInterrupt(2), FUUU, RISING );
@@ -99,7 +109,7 @@ agent:
     {
       udator();
       apa--;
-      j = j + 3;
+      j = j + 12;
     }
     waiterr();
   }
@@ -124,7 +134,7 @@ agent:
     {
       udator();
       apa--;
-      j++;
+      j = j + 12;
     }
     waiterr();
   }
